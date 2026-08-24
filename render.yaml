@@ -1,0 +1,60 @@
+services:
+  # ---- API: always-on Node + Socket.io + cron (Render web service) ----
+  - type: web
+    name: bookit-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: node dist/server.js
+    healthCheckPath: /health
+    autoDeploy: true
+    disk:
+      name: bookit-uploads
+      mountPath: /app/uploads
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # paste your MongoDB Atlas connection string
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_ORIGIN
+        sync: false # your frontend origin, e.g. https://bookit.vercel.app
+      - key: PUBLIC_URL
+        sync: false # same as CLIENT_ORIGIN (used in redirects/.ics)
+      - key: STATIC_URL
+        sync: false # API origin, e.g. https://bookit-api.onrender.com (serves /uploads)
+      - key: EMAIL_FROM
+        value: Bookit <noreply@bookit.local>
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+  # ---- Frontend: static React build ----
+  - type: static
+    name: bookit-web
+    rootDir: client
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false # e.g. https://bookit-api.onrender.com (baked in at build time)
