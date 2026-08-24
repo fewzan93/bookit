@@ -4,6 +4,8 @@ const cleaned: Record<string, string | undefined> = {};
 for (const [k, v] of Object.entries(process.env)) {
   cleaned[k] = typeof v === 'string' && v.trim() === '' ? undefined : v;
 }
+if (cleaned.CLIENT_ORIGIN) cleaned.CLIENT_ORIGIN = cleaned.CLIENT_ORIGIN.replace(/\/+$/, '');
+if (cleaned.PUBLIC_URL) cleaned.PUBLIC_URL = cleaned.PUBLIC_URL.replace(/\/+$/, '');
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
