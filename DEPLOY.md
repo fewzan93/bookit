@@ -45,6 +45,8 @@ Vercel can't host this backend (Socket.io WebSockets + cron need an always-on No
 4. `JWT_SECRET` auto-generates. Deploy → your API is live at `https://bookit-api.onrender.com` (health: `/health`).
 5. Seed once: Render → your service → **Shell** tab → `node scripts/seed-data.mjs` + `node scripts/seed-promo.mjs`.
 
+> Free plan notes: **no persistent disk** — `/uploads` is ephemeral, so set `CLOUDINARY_*` to keep banners across redeploys (or upgrade for a small disk). If a previous Blueprint attempt failed with "issue", delete the failed blueprint + its service from the dashboard first, then re-create.
+
 ### 1c. Vercel frontend (1 min)
 1. vercel.com → New Project → import the same repo → framework: **Vite** → root dir `client` → deploy.
 2. Project → Settings → **Environment Variables**: `VITE_API_URL=https://bookit-api.onrender.com` (Production + Preview) → **Redeploy**.

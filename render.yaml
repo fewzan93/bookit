@@ -9,10 +9,6 @@ services:
     startCommand: node dist/server.js
     healthCheckPath: /health
     autoDeploy: true
-    disk:
-      name: bookit-uploads
-      mountPath: /app/uploads
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
@@ -29,7 +25,7 @@ services:
       - key: STATIC_URL
         sync: false # API origin, e.g. https://bookit-api.onrender.com (serves /uploads)
       - key: EMAIL_FROM
-        value: Bookit <noreply@bookit.local>
+        value: "Bookit <noreply@bookit.local>"
       - key: STRIPE_SECRET_KEY
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
