@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+const cleaned: Record<string, string | undefined> = {};
+for (const [k, v] of Object.entries(process.env)) {
+  cleaned[k] = typeof v === 'string' && v.trim() === '' ? undefined : v;
+}
+
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(5000),
@@ -21,10 +26,11 @@ const envSchema = z.object({
   CLOUDINARY_API_SECRET: z.string().optional(),
 });
 
-const parsed = envSchema.safeParse(process.env);
+const parsed = envSchema.safeParse(cleaned);
 
 if (!parsed.success) {
-  throw new Error(`Invalid environment configuration: ${JSON.stringify(parsed.error.flatten().fieldErrors)}`);
+  console.error('[env] validation errors:', parsed.error.flatten().fieldErrors);
+  process.exit(1);
 }
 
 export const env = parsed.data;
