@@ -1,4 +1,4 @@
-import { BarChart3, CalendarHeart, Home as HomeIcon } from 'lucide-react';
+import { BarChart3, CalendarHeart, Home as HomeIcon, Users } from 'lucide-react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useAuth } from '../../auth/hooks';
@@ -41,12 +41,25 @@ export default function DashboardLayout() {
               >
                 <BarChart3 className="size-4" /> Analytics
               </NavLink>
+              {user?.role === 'admin' && (
+                <NavLink
+                  to="/dashboard/admin"
+                  className={({ isActive }) =>
+                    cn(
+                      'inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm transition',
+                      isActive ? 'bg-accent text-foreground' : 'text-muted-foreground hover:text-foreground',
+                    )
+                  }
+                >
+                  <Users className="size-4" /> Admin
+                </NavLink>
+              )}
             </nav>
           </div>
 
           <div className="flex items-center gap-3">
             <span className="hidden rounded-full border border-border px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase sm:inline">
-              Organizer
+              {user?.role === 'admin' ? 'Admin' : 'Organizer'}
             </span>
             <Link
               to="/"

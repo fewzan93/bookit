@@ -18,7 +18,7 @@ export class AnalyticsService {
     if (event.organizerId.toString() !== organizerId) throw new ApiError(403, 'Not your event');
   }
 
-  async summary(organizerId: string): Promise<{
+  async summary(organizerId: string, role?: string): Promise<{
     revenue: number;
     ticketsSold: number;
     capacity: number;
@@ -26,7 +26,8 @@ export class AnalyticsService {
     issuedTickets: number;
     events: { _id: string; title: string; slug: string; status: string; sold: number; capacity: number; revenue: number; startAt: Date }[];
   }> {
-    const events = await Event.find({ organizerId }).select('title slug status startAt tiers').exec();
+    const query = role === 'admin' ? {} : { organizerId };
+    const events = await Event.find(query).select('title slug status startAt tiers').exec();
     const eventIds = events.map((e) => e.id);
 
     const confirmed: { total: number; eventId: string; paidAt?: Date }[] = await Booking.find({

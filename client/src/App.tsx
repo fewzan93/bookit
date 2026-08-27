@@ -22,6 +22,7 @@ const AnalyticsPage = lazy(() => import('./features/analytics/pages/Analytics'))
 const MyTicketsPage = lazy(() => import('./features/tickets/pages/MyTickets'));
 const ScannerPage = lazy(() => import('./features/tickets/pages/Scanner'));
 const WaitlistsPage = lazy(() => import('./features/waitlist/pages/Waitlists'));
+const AdminDashboard = lazy(() => import('./features/admin/pages/AdminDashboard'));
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -113,6 +114,7 @@ export default function App() {
           <Route path="new" element={<EventForm />} />
           <Route path=":id/edit" element={<EventForm />} />
           <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="admin" element={<AdminDashboard />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

@@ -8,6 +8,7 @@ import { bookingsApi } from '../features/checkout/api';
 import { ticketsApi } from '../features/tickets/api';
 import { waitlistsApi } from '../features/waitlist/api';
 import { analyticsApi } from '../features/analytics/api';
+import { adminApi } from '../features/admin/api';
 
 export const store = configureStore({
   reducer: {
@@ -19,9 +20,10 @@ export const store = configureStore({
     [ticketsApi.reducerPath]: ticketsApi.reducer,
     [waitlistsApi.reducerPath]: waitlistsApi.reducer,
     [analyticsApi.reducerPath]: analyticsApi.reducer,
+    [adminApi.reducerPath]: adminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, eventsApi.middleware, bookingsApi.middleware, ticketsApi.middleware, waitlistsApi.middleware, analyticsApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, eventsApi.middleware, bookingsApi.middleware, ticketsApi.middleware, waitlistsApi.middleware, analyticsApi.middleware, adminApi.middleware),
 });
 
 setupListeners(store.dispatch);

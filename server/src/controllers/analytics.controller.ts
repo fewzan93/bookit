@@ -5,7 +5,7 @@ import { AnalyticsService } from '../services/analytics.service.js';
 const analyticsService = new AnalyticsService();
 
 export const summary = asyncHandler(async (req: Request, res: Response) => {
-  const data = await analyticsService.summary(req.user!.id);
+  const data = await analyticsService.summary(req.user!.id, req.user!.role);
   res.json({ success: true, data });
 });
 

@@ -41,7 +41,8 @@ export function createApp(): Express {
     });
   });
 
-  app.use('/api/v1/auth', authLimiter);
+  app.use('/api/v1/auth/login', authLimiter);
+  app.use('/api/v1/auth/register', authLimiter);
   app.use(generalLimiter);
 
   app.use('/api/v1/auth', authRoutes);
