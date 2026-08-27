@@ -65,7 +65,20 @@ export const adminApi = createApi({
       transformResponse: (res: ApiResponse<{ bookings: AdminBooking[] }>) => res.data.bookings,
       providesTags: ['Admin'],
     }),
+    changeUserRole: build.mutation<{ id: string; name: string; email: string; role: string }, { id: string; role: string }>({
+      query: ({ id, role }) => ({ url: `admin/users/${id}/role`, method: 'PATCH', body: { role } }),
+      invalidatesTags: ['Admin'],
+      transformResponse: (res: ApiResponse<{ user: { id: string; name: string; email: string; role: string } }>) => res.data.user,
+    }),
+    deleteUser: build.mutation<void, string>({
+      query: (id) => ({ url: `admin/users/${id}`, method: 'DELETE' }),
+      invalidatesTags: ['Admin'],
+    }),
+    deleteEvent: build.mutation<void, string>({
+      query: (id) => ({ url: `admin/events/${id}`, method: 'DELETE' }),
+      invalidatesTags: ['Admin'],
+    }),
   }),
 });
 
-export const { useGetAdminStatsQuery, useGetAdminUsersQuery, useGetAdminBookingsQuery } = adminApi;
+export const { useGetAdminStatsQuery, useGetAdminUsersQuery, useGetAdminBookingsQuery, useChangeUserRoleMutation, useDeleteUserMutation, useDeleteEventMutation } = adminApi;

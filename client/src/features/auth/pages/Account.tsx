@@ -2,6 +2,7 @@ import { Loader2, LogOut, Mail, Shield, Ticket, User as UserIcon } from 'lucide-
 import { Link } from 'react-router-dom';
 import { useLogoutMutation } from '../api';
 import { useAuth } from '../hooks';
+import { resetAllApiState } from '../../../app/resetApi';
 
 export default function AccountPage() {
   const { user } = useAuth();
@@ -21,7 +22,7 @@ export default function AccountPage() {
           <Shield className="size-3.5" /> {user?.role} account
         </span>
         <button
-          onClick={() => logout()}
+          onClick={() => { logout(); resetAllApiState(); }}
           disabled={isLoading}
           className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card py-3 text-sm font-medium text-foreground transition hover:border-destructive/40 hover:text-destructive disabled:opacity-60"
         >

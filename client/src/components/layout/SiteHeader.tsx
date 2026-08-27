@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useLogoutMutation } from "@/features/auth/api"
 import { useAuth } from "@/features/auth/hooks"
+import { resetAllApiState } from "@/app/resetApi"
 
 export function SiteHeader() {
   const { user } = useAuth()
@@ -46,7 +47,7 @@ export function SiteHeader() {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                onClick={() => logout()}
+                onClick={() => { logout(); resetAllApiState(); }}
                 disabled={isLoading}
                 aria-label="Sign out"
                 className="text-muted-foreground"
