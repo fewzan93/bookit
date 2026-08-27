@@ -18,32 +18,32 @@ const USERS = [
 /* ── Banner images (Unsplash, non-music) ────────────────────── */
 const BANNERS = {
   sports: [
-    'https://images.unsplash.com/photo-1461896836934-bd45ba8a0b91?w=1200',   // football
-    'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200',   // soccer ball
-    'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200',     // running
-    'https://images.unsplash.com/photo-1461896836934-bd45ba8a0b91?w=1200',   // basketball
+    'https://images.unsplash.com/photo-1461896836934-bd45ba8a0b91?w=1200',
+    'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200',
+    'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200',
+    'https://images.unsplash.com/photo-1461896836934-bd45ba8a0b91?w=1200',
   ],
   education: [
-    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200',   // lecture
-    'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200',   // learning
-    'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200',   // students
+    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200',
+    'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200',
+    'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200',
   ],
   tech: [
-    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200',   // tech conf
-    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200',   // coding
-    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200',   // laptops
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200',
+    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200',
+    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200',
   ],
   gaming: [
-    'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200',     // gaming
-    'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1200',   // esports
+    'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200',
+    'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=1200',
   ],
   community: [
-    'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200',     // community
-    'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200',   // charity
-    'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200',   // charity/volunteers
+    'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200',
+    'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200',
+    'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200',
   ],
   other: [
-    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200',   // generic event
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200',
   ],
 };
 
@@ -152,7 +152,7 @@ const base = Date.now() + 7 * DAY;
 const EVENTS = [
   // ─── Education ──────────────────────────────────────────────
   {
-    title: 'Quran Recitation Workshop',
+    title: 'Full-Stack Web Development Bootcamp',
     category: 'education',
     city: 'Istanbul',
     startAt: new Date(base),
@@ -160,11 +160,11 @@ const EVENTS = [
       { name: 'General Admission', price: 0, capacity: 240 },
       { name: 'VIP Front Row', price: 15, capacity: 30 },
     ],
-    tags: ['quran', 'recitation', 'tajweed'],
-    description: 'A beautiful evening of Quran recitation led by world-renowned Qaris. Learn tajweed techniques and listen to melodious recitations. Open to all ages.',
+    tags: ['web-dev', 'bootcamp', 'coding'],
+    description: 'An intensive hands-on bootcamp covering HTML, CSS, JavaScript, React, Node.js, and MongoDB. Build real projects from scratch. Open to all skill levels — from complete beginners to experienced devs looking to sharpen their stack.',
   },
   {
-    title: 'Islamic Finance Masterclass',
+    title: 'Personal Finance & Investment Workshop',
     category: 'education',
     city: 'Dubai',
     startAt: new Date(base + 3 * DAY),
@@ -172,11 +172,11 @@ const EVENTS = [
       { name: 'Standard', price: 50, afterPrice: 75, capacity: 200, activeUntil: new Date(base + 1 * DAY) },
       { name: 'Premium (Certificate)', price: 150, capacity: 50 },
     ],
-    tags: ['finance', 'halal', 'investment'],
-    description: 'Learn the principles of Sharia-compliant investing, Islamic banking, and modern fintech applications. Includes certificate of completion.',
+    tags: ['finance', 'investment', 'budgeting'],
+    description: 'Learn practical personal finance skills — budgeting, saving strategies, stock market basics, and modern fintech tools. Includes certificate of completion. Perfect for anyone looking to take control of their financial future.',
   },
   {
-    title: 'Arabic Calligraphy for Beginners',
+    title: 'Digital Art & Illustration Masterclass',
     category: 'education',
     city: 'Cairo',
     startAt: new Date(base + 10 * DAY),
@@ -184,11 +184,11 @@ const EVENTS = [
       { name: 'Student', price: 10, capacity: 40 },
       { name: 'Adult', price: 25, capacity: 20 },
     ],
-    tags: ['calligraphy', 'art', 'arabic'],
-    description: 'Discover the art of Arabic calligraphy with master calligrapher Ahmad al-Din. All materials provided. Suitable for complete beginners.',
+    tags: ['digital-art', 'illustration', 'creative'],
+    description: 'Discover the art of digital illustration with professional artist Sara Kim. Learn Procreate, Adobe Illustrator, and character design fundamentals. All materials provided. Suitable for complete beginners.',
   },
   {
-    title: 'Seerah of the Prophet ﷺ — Lecture Series',
+    title: 'Data Science & Analytics Lecture Series',
     category: 'education',
     city: 'Riyadh',
     startAt: new Date(base + 14 * DAY),
@@ -196,22 +196,22 @@ const EVENTS = [
       { name: 'Free Entry', price: 0, capacity: 500 },
       { name: 'Sponsor a Seat', price: 25, capacity: 100 },
     ],
-    tags: ['seerah', 'lecture', 'prophet'],
-    description: 'A deeply inspiring 3-part lecture series exploring the life and legacy of Prophet Muhammad ﷺ. Learn from renowned scholars.',
+    tags: ['data-science', 'analytics', 'lecture'],
+    description: 'A 3-part lecture series exploring data science fundamentals, real-world case studies, and career pathways in analytics. Learn from industry professionals working at top tech companies.',
   },
   {
-    title: 'Youth Hifz Program — Registration Day',
+    title: 'Youth Robotics & Coding Program — Registration Day',
     category: 'education',
     city: 'Jakarta',
     startAt: new Date(base + 18 * DAY),
     tiers: [
       { name: 'Registration Fee', price: 5, capacity: 100 },
     ],
-    tags: ['hifz', 'youth', 'quran'],
-    description: 'Register for the annual Hifz program. Young students will memorize the Quran with experienced teachers. Limited spots available.',
+    tags: ['robotics', 'youth', 'coding'],
+    description: 'Register for the annual youth robotics and coding program. Young students will build robots and learn programming with experienced mentors. Limited spots available — first come, first served.',
   },
   {
-    title: 'STEM Workshop for Muslim Youth',
+    title: 'STEM Workshop for Young Innovators',
     category: 'education',
     city: 'Kuala Lumpur',
     startAt: new Date(base + 22 * DAY),
@@ -220,7 +220,7 @@ const EVENTS = [
       { name: 'Professional', price: 50, capacity: 40 },
     ],
     tags: ['stem', 'youth', 'science'],
-    description: 'Hands-on workshops in robotics, coding, and engineering designed for Muslim youth. Build real projects and learn how science and faith complement each other.',
+    description: 'Hands-on workshops in robotics, coding, and engineering designed for young innovators aged 12–18. Build real projects, explore 3D printing, and learn how technology shapes the future.',
   },
 
   // ─── Sports ─────────────────────────────────────────────────
@@ -234,7 +234,7 @@ const EVENTS = [
       { name: 'VIP Seating', price: 60, afterPrice: 80, capacity: 60, activeUntil: new Date(base + 2 * DAY) },
     ],
     tags: ['football', 'tournament', 'community'],
-    description: 'The biggest community football tournament in the region! 16 teams competing for the championship. Food courts, kids zone, and family-friendly atmosphere.',
+    description: 'The biggest community football tournament in the region! 16 teams competing for the championship. Food courts, kids zone, and family-friendly atmosphere. Come cheer for your local team!',
   },
   {
     title: 'Swimming Championship — Masters',
@@ -246,7 +246,7 @@ const EVENTS = [
       { name: 'Competitor Pass', price: 35, capacity: 100 },
     ],
     tags: ['swimming', 'championship', 'fitness'],
-    description: 'Annual masters swimming championship. Compete or cheer from the stands. All categories: freestyle, breaststroke, butterfly, and relay.',
+    description: 'Annual masters swimming championship. Compete or cheer from the stands. All categories: freestyle, breaststroke, butterfly, and relay. Open to swimmers of all ages and skill levels.',
   },
   {
     title: 'Karate & Taekwondo Open Day',
@@ -258,7 +258,7 @@ const EVENTS = [
       { name: 'Participant Registration', price: 10, capacity: 80 },
     ],
     tags: ['martial-arts', 'karate', 'taekwondo'],
-    description: 'Try martial arts for free! Professional instructors offering introductory sessions in karate and taekwondo. All ages and skill levels welcome.',
+    description: 'Try martial arts for free! Professional instructors offering introductory sessions in karate and taekwondo. All ages and skill levels welcome. Wear comfortable athletic clothing.',
   },
   {
     title: '5K Charity Fun Run',
@@ -270,7 +270,7 @@ const EVENTS = [
       { name: 'Family Pack (4 runners)', price: 40, capacity: 100 },
     ],
     tags: ['running', 'charity', 'fitness'],
-    description: 'Run for a cause! All proceeds go to orphan education programs. Route through Cairo\'s scenic Corniche. Finishers medal for all participants.',
+    description: 'Run for a cause! All proceeds go to children\'s education programs. Scenic route through the Corniche. Finishers medal for all participants. Water stations every kilometer.',
   },
   {
     title: 'Basketball League — Season Opener',
@@ -282,12 +282,12 @@ const EVENTS = [
       { name: 'Seated', price: 20, capacity: 120 },
     ],
     tags: ['basketball', 'league', 'indoor'],
-    description: 'The Lahore Basketball League kicks off its new season! Watch 8 top local teams battle it out in an action-packed opening weekend.',
+    description: 'The Lahore Basketball League kicks off its new season! Watch 8 top local teams battle it out in an action-packed opening weekend. Half-time shows, giveaways, and great energy.',
   },
 
   // ─── Gaming ─────────────────────────────────────────────────
   {
-    title: 'Halal Gaming Convention 2026',
+    title: 'Global Gaming Convention 2026',
     category: 'gaming',
     city: 'Kuala Lumpur',
     startAt: new Date(base + 6 * DAY),
@@ -295,8 +295,8 @@ const EVENTS = [
       { name: 'Day Pass', price: 25, afterPrice: 40, capacity: 500, activeUntil: new Date(base + 3 * DAY) },
       { name: 'VIP Weekend', price: 80, capacity: 100 },
     ],
-    tags: ['gaming', 'convention', 'halal'],
-    description: 'The largest halal gaming event in Southeast Asia! Explore game demos, compete in tournaments, meet content creators, and discover family-friendly titles.',
+    tags: ['gaming', 'convention', 'esports'],
+    description: 'The largest gaming event in Southeast Asia! Explore game demos, compete in tournaments, meet content creators, and discover family-friendly titles. Indie game showcase and retro gaming zone included.',
   },
   {
     title: 'FIFA Tournament — City Championship',
@@ -308,7 +308,7 @@ const EVENTS = [
       { name: 'Player Entry', price: 30, capacity: 64 },
     ],
     tags: ['fifa', 'esports', 'tournament'],
-    description: 'Compete in the Istanbul FIFA Championship! 64 players battling for the title. Live commentary, big screens, and exciting prizes.',
+    description: 'Compete in the Istanbul FIFA Championship! 64 players battling for the title. Live commentary, big screens, and exciting prizes for the top 3 finishers.',
   },
   {
     title: 'Mobile Gaming Masters',
@@ -320,12 +320,12 @@ const EVENTS = [
       { name: 'VIP Gaming Lounge', price: 25, capacity: 30 },
     ],
     tags: ['mobile', 'gaming', 'esports'],
-    description: 'Top mobile gamers compete in a day-long tournament featuring the most popular titles. Free play stations for spectators!',
+    description: 'Top mobile gamers compete in a day-long tournament featuring the most popular titles. Free play stations for spectators! Snacks and drinks included with VIP.',
   },
 
   // ─── Tech ───────────────────────────────────────────────────
   {
-    title: 'Halal Tech Summit 2026',
+    title: 'Global Tech Summit 2026',
     category: 'tech',
     city: 'Dubai',
     startAt: new Date(base + 4 * DAY),
@@ -333,8 +333,8 @@ const EVENTS = [
       { name: 'Standard', price: 100, afterPrice: 150, capacity: 300, activeUntil: new Date(base + 1 * DAY) },
       { name: 'All-Access', price: 300, capacity: 50 },
     ],
-    tags: ['tech', 'startup', 'halal-economy'],
-    description: 'The premier technology summit for the Muslim world. 30+ speakers from leading tech companies, startup pitch competition, and networking dinner.',
+    tags: ['tech', 'startup', 'innovation'],
+    description: 'The premier technology summit bringing together innovators from around the world. 30+ speakers from leading tech companies, startup pitch competition, and networking dinner. Topics: AI, blockchain, climate tech.',
   },
   {
     title: 'AI & Machine Learning Bootcamp',
@@ -346,7 +346,7 @@ const EVENTS = [
       { name: 'In-Person + Workshop', price: 120, capacity: 60 },
     ],
     tags: ['ai', 'machine-learning', 'bootcamp'],
-    description: '3-day intensive bootcamp covering neural networks, NLP, and computer vision. Build real projects with expert mentors from Google and Microsoft.',
+    description: '3-day intensive bootcamp covering neural networks, NLP, and computer vision. Build real projects with expert mentors from Google and Microsoft. No prior ML experience required.',
   },
   {
     title: 'Hackathon for Good',
@@ -358,7 +358,7 @@ const EVENTS = [
       { name: 'Mentor Pass', price: 0, capacity: 30 },
     ],
     tags: ['hackathon', 'social-impact', 'coding'],
-    description: '48-hour hackathon building solutions for education, healthcare, and sustainability in Muslim communities. Prizes worth $10,000+.',
+    description: '48-hour hackathon building solutions for education, healthcare, and sustainability. Teams of 2–5 compete for prizes worth $10,000+. Mentors from top companies guide participants.',
   },
   {
     title: 'Cybersecurity Workshop',
@@ -370,12 +370,12 @@ const EVENTS = [
       { name: 'Professional', price: 75, capacity: 40 },
     ],
     tags: ['cybersecurity', 'workshop', 'it'],
-    description: 'Hands-on cybersecurity training covering ethical hacking, network defense, and secure coding. Lab environment included.',
+    description: 'Hands-on cybersecurity training covering ethical hacking, network defense, and secure coding practices. Lab environment included. Perfect for IT professionals and students.',
   },
 
   // ─── Community ──────────────────────────────────────────────
   {
-    title: 'Eid Community Celebration',
+    title: 'Spring Community Festival',
     category: 'community',
     city: 'Istanbul',
     startAt: new Date(base + 2 * DAY),
@@ -383,8 +383,8 @@ const EVENTS = [
       { name: 'Free Entry', price: 0, capacity: 1000 },
       { name: 'Family VIP Tent', price: 40, capacity: 100 },
     ],
-    tags: ['eid', 'celebration', 'family'],
-    description: 'Join us for a grand Eid celebration! Activities for children, cultural performances, delicious food, and community bonding. All families welcome.',
+    tags: ['festival', 'family', 'community'],
+    description: 'Join us for a vibrant spring celebration! Activities for children, cultural performances, local food vendors, and community bonding. All families welcome — bring your friends and neighbors.',
   },
   {
     title: 'Charity Gala Dinner',
@@ -396,10 +396,10 @@ const EVENTS = [
       { name: 'Corporate Table (10)', price: 1800, capacity: 20 },
     ],
     tags: ['charity', 'gala', 'fundraiser'],
-    description: 'Annual charity gala supporting orphan education across 12 countries. Elegant dinner, live auction, and inspiring stories of impact.',
+    description: 'Annual charity gala supporting children\'s education across 12 countries. Elegant dinner, live auction, and inspiring stories of impact. Dress code: business formal.',
   },
   {
-    title: 'Interfaith Dialogue & Peace Conference',
+    title: 'Global Dialogue & Peace Conference',
     category: 'community',
     city: 'Amman',
     startAt: new Date(base + 17 * DAY),
@@ -407,8 +407,8 @@ const EVENTS = [
       { name: 'General', price: 0, capacity: 300 },
       { name: 'Sponsor', price: 50, capacity: 50 },
     ],
-    tags: ['interfaith', 'dialogue', 'peace'],
-    description: 'Building bridges through understanding. Scholars and community leaders from various faiths come together for meaningful dialogue and mutual respect.',
+    tags: ['dialogue', 'peace', 'conference'],
+    description: 'Building bridges through understanding. Scholars, activists, and community leaders from diverse backgrounds come together for meaningful dialogue on peace, cooperation, and mutual respect.',
   },
   {
     title: 'Community Garden Launch',
@@ -419,10 +419,10 @@ const EVENTS = [
       { name: 'Free Entry', price: 0, capacity: 200 },
     ],
     tags: ['garden', 'environment', 'volunteer'],
-    description: 'Be part of Lahore\'s first community garden! Help us plant, build raised beds, and create a green space for the neighborhood. Lunch provided.',
+    description: 'Be part of Lahore\'s first community garden! Help us plant, build raised beds, and create a green space for the neighborhood. Lunch provided. Bring your gardening gloves!',
   },
   {
-    title: 'Orphan Sponsorship Drive',
+    title: 'Children\'s Education Sponsorship Drive',
     category: 'community',
     city: 'Jakarta',
     startAt: new Date(base + 26 * DAY),
@@ -430,11 +430,11 @@ const EVENTS = [
       { name: 'Attendee', price: 0, capacity: 300 },
       { name: 'Sponsor Registration', price: 25, capacity: 200 },
     ],
-    tags: ['orphan', 'sponsorship', 'charity'],
-    description: 'Sponsor an orphan\'s education for a year. Meet the children, learn about their stories, and make a lasting impact on a young life.',
+    tags: ['education', 'sponsorship', 'charity'],
+    description: 'Sponsor a child\'s education for a year. Meet the students, learn about their stories, and make a lasting impact on a young life. Every contribution matters.',
   },
   {
-    title: 'Women\'s Empowerment Summit',
+    title: 'Women in Leadership Summit',
     category: 'community',
     city: 'Kuala Lumpur',
     startAt: new Date(base + 28 * DAY),
@@ -443,7 +443,7 @@ const EVENTS = [
       { name: 'VIP (Lunch + Networking)', price: 80, capacity: 50 },
     ],
     tags: ['women', 'empowerment', 'leadership'],
-    description: 'Celebrating Muslim women leaders in business, science, and community service. Inspiring talks, workshops, and networking opportunities.',
+    description: 'Celebrating women leaders in business, science, and community service. Inspiring talks, interactive workshops, and networking opportunities. Open to all genders — allyship welcome.',
   },
 ];
 
