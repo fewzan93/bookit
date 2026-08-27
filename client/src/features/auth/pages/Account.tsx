@@ -22,7 +22,10 @@ export default function AccountPage() {
           <Shield className="size-3.5" /> {user?.role} account
         </span>
         <button
-          onClick={() => { logout(); resetAllApiState(); }}
+          onClick={async () => {
+            await logout().unwrap()
+            resetAllApiState()
+          }}
           disabled={isLoading}
           className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card py-3 text-sm font-medium text-foreground transition hover:border-destructive/40 hover:text-destructive disabled:opacity-60"
         >

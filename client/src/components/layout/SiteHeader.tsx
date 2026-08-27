@@ -47,7 +47,10 @@ export function SiteHeader() {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                onClick={() => { logout(); resetAllApiState(); }}
+                onClick={async () => {
+                  await logout().unwrap()
+                  resetAllApiState()
+                }}
                 disabled={isLoading}
                 aria-label="Sign out"
                 className="text-muted-foreground"
