@@ -15,6 +15,7 @@ import { ticketRoutes } from './routes/ticket.routes.js';
 import { uploadRoutes } from './routes/upload.routes.js';
 import { venueRoutes } from './routes/venue.routes.js';
 import { waitlistRoutes } from './routes/waitlist.routes.js';
+import { adminRoutes } from './routes/admin.routes.js';
 import { stripeWebhook } from './controllers/webhook.controller.js';
 
 export function createApp(): Express {
@@ -51,6 +52,7 @@ export function createApp(): Express {
   app.use('/api/v1/tickets', ticketRoutes);
   app.use('/api/v1/waitlists', waitlistRoutes);
   app.use('/api/v1/analytics', analyticsRoutes);
+  app.use('/api/v1/admin', adminRoutes);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
