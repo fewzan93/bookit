@@ -1,6 +1,6 @@
 import { Schema, model, type Document, type Types } from 'mongoose';
 
-export type EventCategory = 'music' | 'theater' | 'sports' | 'conference' | 'festival' | 'comedy' | 'other';
+export type EventCategory = 'education' | 'sports' | 'gaming' | 'tech' | 'community' | 'other';
 export type EventStatus = 'draft' | 'published' | 'cancelled' | 'ended';
 
 export interface EventTier {
@@ -53,7 +53,7 @@ const eventSchema = new Schema<IEvent>(
     description: { type: String, required: true, minlength: 10, maxlength: 5000 },
     category: {
       type: String,
-      enum: ['music', 'theater', 'sports', 'conference', 'festival', 'comedy', 'other'],
+      enum: ['education', 'sports', 'gaming', 'tech', 'community', 'other'],
       required: true,
       index: true,
     },

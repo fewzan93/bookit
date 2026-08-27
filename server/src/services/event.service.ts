@@ -1,6 +1,10 @@
 import mongoose, { type PipelineStage } from 'mongoose';
 import { Event, type IEvent } from '../models/event.model.js';
 import { Venue } from '../models/venue.model.js';
+import { Seat } from '../models/seat.model.js';
+import { Booking } from '../models/booking.model.js';
+import { Ticket } from '../models/ticket.model.js';
+import { Waitlist } from '../models/waitlist.model.js';
 import { ApiError } from '../middlewares/errorHandler.js';
 import { uniqueSlug } from '../utils/slug.js';
 import type { EventCreateInput, EventUpdateInput, ListEventsQuery } from '../routes/event.routes.js';
@@ -59,8 +63,8 @@ export class EventService {
     return event;
   }
 
-  async update(id: string, input: EventUpdateInput, organizerId: string): Promise<IEvent> {
-    await this.assertOwner(id, organizerId);
+  async update(id: string, input: EventUpdateInput, organizerId: string, role?: string): Promise<IEvent> {
+    await this.assertOwner(id, organizerId, role);
 
     const patch: Record<string, unknown> = { ...input };
     if (input.bannerUrl !== undefined) {
@@ -69,11 +73,16 @@ export class EventService {
       delete patch.bannerPublicId;
     }
     if (input.tiers !== undefined) {
+      // Preserve existing sold counts — fetch current tiers first
+      const current = await Event.findById(id).select('tiers').exec();
+      const soldByTierId = new Map<string, number>();
+      for (const t of current?.tiers ?? []) soldByTierId.set(t.tierId, t.sold);
       patch.tiers = input.tiers.map((t, i) => ({
         ...t,
         tierId: this.tierId(i),
         currency: t.currency ?? 'USD',
-        sold: 0,
+        // Preserve sold from matching tierId if name/position is the same
+        sold: soldByTierId.get(this.tierId(i)) ?? 0,
       }));
     }
     if (input.longitude !== undefined || input.latitude !== undefined) {
@@ -89,8 +98,13 @@ export class EventService {
     return event;
   }
 
-  async delete(id: string, organizerId: string): Promise<void> {
-    await this.assertOwner(id, organizerId);
+  async delete(id: string, organizerId: string, role?: string): Promise<void> {
+    await this.assertOwner(id, organizerId, role);
+    // Clean up related data
+    await Seat.deleteMany({ eventId: id }).exec();
+    await Booking.updateMany({ eventId: id, status: 'pending' }, { $set: { status: 'cancelled' } }).exec();
+    await Ticket.updateMany({ eventId: id, status: 'valid' }, { $set: { status: 'cancelled' } }).exec();
+    await Waitlist.deleteMany({ eventId: id }).exec();
     await Event.findByIdAndDelete(id).exec();
   }
 
@@ -241,9 +255,10 @@ export class EventService {
     };
   }
 
-  private async assertOwner(id: string, organizerId: string): Promise<void> {
+  private async assertOwner(id: string, organizerId: string, role?: string): Promise<void> {
     const event = await Event.findById(id).select('organizerId').exec();
     if (!event) throw new ApiError(404, 'Event not found');
+    if (role === 'admin') return;
     if (event.organizerId.toString() !== organizerId) {
       throw new ApiError(403, 'You can only manage your own events');
     }

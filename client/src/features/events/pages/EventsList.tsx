@@ -42,19 +42,19 @@ export default function EventsList() {
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Your events</h1>
-          <p className="text-sm text-zinc-500">Create, publish and manage everything in one place.</p>
+          <h1 className="text-2xl font-bold text-foreground">Your events</h1>
+          <p className="text-sm text-muted-foreground">Create, publish and manage everything in one place.</p>
         </div>
         <Link
           to="/dashboard/new"
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-violet-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/20 transition hover:brightness-110"
+          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:brightness-110"
         >
           <Plus className="size-4" /> New event
         </Link>
       </div>
 
       {error && (
-        <div className="mb-4 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</div>
+        <div className="mb-4 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">{error}</div>
       )}
 
       {isLoading ? (
@@ -62,22 +62,22 @@ export default function EventsList() {
           <Loader2 className="size-6 animate-spin text-fuchsia-400" />
         </div>
       ) : isError ? (
-        <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-12 text-center">
-          <p className="text-zinc-300">Couldn&apos;t load your events.</p>
+        <div className="rounded-2xl border border-border bg-card px-6 py-12 text-center">
+          <p className="text-foreground">Couldn&apos;t load your events.</p>
           <button
             onClick={() => refetch()}
-            className="mt-4 rounded-xl border border-white/10 px-4 py-2 text-sm text-white transition hover:border-fuchsia-400/50"
+            className="mt-4 rounded-xl border border-border px-4 py-2 text-sm text-foreground transition hover:border-primary/50"
           >
             Retry
           </button>
         </div>
       ) : !events || events.length === 0 ? (
-        <div className="rounded-3xl border border-dashed border-white/10 px-6 py-16 text-center">
-          <p className="text-lg font-semibold text-white">No events yet</p>
-          <p className="mt-1 text-sm text-zinc-500">Create your first event and start selling tickets.</p>
+        <div className="rounded-3xl border border-dashed border-border px-6 py-16 text-center">
+          <p className="text-lg font-semibold text-foreground">No events yet</p>
+          <p className="mt-1 text-sm text-muted-foreground">Create your first event and start selling tickets.</p>
           <Link
             to="/dashboard/new"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-violet-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
           >
             <Plus className="size-4" /> Create event
           </Link>
@@ -90,7 +90,7 @@ export default function EventsList() {
             return (
               <div
                 key={event._id}
-                className="flex flex-col gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 transition hover:border-white/15 sm:flex-row sm:items-center"
+                className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/15 sm:flex-row sm:items-center"
               >
                 <img
                   src={event.banner.url}
@@ -104,10 +104,10 @@ export default function EventsList() {
                     </span>
                     <span className="rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-zinc-400 uppercase">{event.category}</span>
                   </div>
-                  <Link to={`/events/${event.slug}`} className="mt-1.5 block truncate font-semibold text-white hover:text-fuchsia-300">
+                  <Link to={`/events/${event.slug}`} className="mt-1.5 block truncate font-semibold text-foreground hover:text-primary">
                     {event.title}
                   </Link>
-                  <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
+                  <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
                     <span className="inline-flex items-center gap-1">
                       <CalendarDays className="size-3.5" /> {formatDate(event.startAt)}
                     </span>
@@ -124,14 +124,14 @@ export default function EventsList() {
                     onClick={() => handleToggle(event)}
                     disabled={toggling}
                     title={event.status === 'published' ? 'Unpublish' : 'Publish'}
-                    className="inline-flex size-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-emerald-400/50 hover:text-emerald-300 disabled:opacity-50"
+                    className="inline-flex size-9 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition hover:border-emerald-400/50 hover:text-emerald-400 disabled:opacity-50"
                   >
                     {event.status === 'published' ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                   </button>
                   <Link
                     to={`/dashboard/${event._id}/edit`}
                     title="Edit"
-                    className="inline-flex size-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-fuchsia-400/50 hover:text-fuchsia-300"
+                    className="inline-flex size-9 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition hover:border-primary/50 hover:text-primary"
                   >
                     <Pencil className="size-4" />
                   </Link>
@@ -139,7 +139,7 @@ export default function EventsList() {
                     onClick={() => handleDelete(event)}
                     disabled={deleting}
                     title="Delete"
-                    className="inline-flex size-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-red-400/50 hover:text-red-300 disabled:opacity-50"
+                    className="inline-flex size-9 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground transition hover:border-destructive/50 hover:text-destructive disabled:opacity-50"
                   >
                     {deleting ? <Loader2 className="size-4 animate-spin" /> : <Trash2 className="size-4" />}
                   </button>

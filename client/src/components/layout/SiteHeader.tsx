@@ -14,8 +14,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-md bg-primary/15 text-primary">
-            <CalendarHeart className="size-5" />
+          <span className="flex size-9 items-center justify-center rounded-md bg-primary/15 text-primary">              <CalendarHeart className="size-5" />
           </span>
           <span className="font-heading text-lg font-bold tracking-tight">Bookit</span>
         </Link>

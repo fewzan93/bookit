@@ -198,12 +198,10 @@ export default function SeatSelectionPage() {
       }
       dispatch(selectionCleared());
     };
-  }, [eventId, dispatch]);
-
-  if (!event) {
+  }, [eventId, dispatch]);      if (!event) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-950">
-        <Loader2 className="size-8 animate-spin text-fuchsia-400" />
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Loader2 className="size-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -211,13 +209,13 @@ export default function SeatSelectionPage() {
   const noSections = (seatMap?.sections.length ?? 0) === 0;
 
   return (
-    <div className="min-h-screen bg-zinc-950 pb-36">
-      <header className="sticky top-0 z-40 border-b border-white/5 bg-zinc-950/85 backdrop-blur-xl">
+    <div className="min-h-screen bg-background pb-36">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          <Link to={`/events/${event.slug}`} className="inline-flex items-center gap-1.5 text-sm text-zinc-300 transition hover:text-white">
+          <Link to={`/events/${event.slug}`} className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition hover:text-foreground">
             <ArrowLeft className="size-4" /> {event.title}
           </Link>
-          <span className="flex items-center gap-1.5 text-xs text-zinc-400">
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <CalendarDays className="size-3.5" /> {formatDate(event.startAt)}
           </span>
         </div>
@@ -225,36 +223,36 @@ export default function SeatSelectionPage() {
 
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 px-3 py-1 text-zinc-300">
+          <span className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-muted-foreground">
             <span className="size-2.5 rounded" style={{ backgroundColor: tierColor('', []) }} /> Available
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-amber-300">
+          <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-amber-400">
             <span className="size-2.5 rounded bg-amber-500" /> Locked by others
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 px-3 py-1 text-zinc-300">
-            <span className="size-2.5 rounded bg-zinc-700" /> Booked
+          <span className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-muted-foreground">
+            <span className="size-2.5 rounded bg-muted-foreground" /> Booked
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 px-3 py-1 text-zinc-500">
-            <span className="size-2.5 rounded bg-zinc-900" /> Disabled
+          <span className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-muted-foreground">
+            <span className="size-2.5 rounded bg-border" /> Disabled
           </span>
-          <span className="ml-auto hidden text-zinc-500 sm:inline">Seats auto-lock for 8 minutes</span>
+          <span className="ml-auto hidden text-muted-foreground sm:inline">Seats auto-lock for 8 minutes</span>
         </div>
 
         {(notice || mapErrorMsg) && (
-          <div className="mb-5 flex items-start gap-2.5 rounded-xl border border-amber-400/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+          <div className="mb-5 flex items-start gap-2.5 rounded-xl border border-amber-400/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-400">
             <AlertTriangle className="mt-0.5 size-4 shrink-0" />
             <span>{mapErrorMsg ?? notice}</span>
-            <button onClick={() => setNotice(null)} className="ml-auto text-amber-300 hover:text-amber-100" aria-label="Dismiss">
+            <button onClick={() => setNotice(null)} className="ml-auto text-amber-400 hover:text-amber-300" aria-label="Dismiss">
               <X className="size-4" />
             </button>
           </div>
         )}
 
         {!user ? (
-          <div className="rounded-3xl border border-dashed border-white/10 px-6 py-20 text-center">
-            <p className="text-lg font-semibold text-white">Sign in to pick seats</p>
-            <p className="mt-1 text-sm text-zinc-500">Seats are locked to your account the moment you tap one.</p>
-            <Link to="/login" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-violet-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110">
+          <div className="rounded-3xl border border-dashed border-border px-6 py-20 text-center">
+            <p className="text-lg font-semibold text-foreground">Sign in to pick seats</p>
+            <p className="mt-1 text-sm text-muted-foreground">Seats are locked to your account the moment you tap one.</p>
+            <Link to="/login" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-5 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-110">
               Sign in to continue
             </Link>
           </div>
@@ -263,16 +261,16 @@ export default function SeatSelectionPage() {
             <Loader2 className="size-6 animate-spin text-fuchsia-400" />
           </div>
         ) : noSections ? (
-          <div className="rounded-3xl border border-dashed border-white/10 px-6 py-20 text-center">
-            <ShoppingCart className="mx-auto size-10 text-zinc-700" />
-            <p className="mt-3 text-lg font-semibold text-white">No seated layout yet</p>
-            <p className="mx-auto mt-1 max-w-md text-sm text-zinc-500">
+          <div className="rounded-3xl border border-dashed border-border px-6 py-20 text-center">
+            <ShoppingCart className="mx-auto size-10 text-muted-foreground" />
+            <p className="mt-3 text-lg font-semibold text-foreground">No seated layout yet</p>
+            <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
               The organizer hasn&apos;t added seat sections for this venue. General-admission tickets will open with checkout in Phase 4.
             </p>
           </div>
         ) : (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-            <div className="mb-8 rounded-2xl border border-white/5 bg-white/[0.02] py-5 text-center text-xs font-semibold tracking-[0.35em] text-zinc-500 uppercase">
+            <div className="mb-8 rounded-2xl border border-border bg-card py-5 text-center text-xs font-semibold tracking-[0.35em] text-muted-foreground uppercase">
               Stage
             </div>
             <SeatMapView
@@ -287,8 +285,7 @@ export default function SeatSelectionPage() {
         )}
       </main>
 
-      {user && selected.length > 0 && (
-        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-zinc-950/90 backdrop-blur-xl">
+      {user && selected.length > 0 && (          <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/90 backdrop-blur-xl">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6">
             <div className="flex flex-wrap items-center gap-2">
               {selected.map((seatId) => {
@@ -297,11 +294,11 @@ export default function SeatSelectionPage() {
                 return (
                   <span
                     key={seatId}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-white"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground"
                   >
                     <span className="size-2 rounded" style={{ backgroundColor: tier ? tierColor(tier.tierId, seatMap?.tiers ?? []) : '#fff' }} />
                     Seat {selected.indexOf(seatId) + 1}
-                    <span className="text-zinc-500">{tier ? formatPrice(tier.price, tier.currency) : ''}</span>
+                    <span className="text-muted-foreground">{tier ? formatPrice(tier.price, tier.currency) : ''}</span>
                   </span>
                 );
               })}
@@ -312,12 +309,12 @@ export default function SeatSelectionPage() {
                 <Timer className="size-4" />
                 {mm}:{ss}
               </span>
-              <button onClick={releaseAll} className="rounded-xl border border-white/10 px-4 py-2.5 text-sm text-zinc-300 transition hover:border-red-400/40 hover:text-red-300">
+              <button onClick={releaseAll} className="rounded-xl border border-border px-4 py-2.5 text-sm text-muted-foreground transition hover:border-destructive/40 hover:text-destructive">
                 Release
               </button>
               <button
                 onClick={() => navigate(`/events/${event.slug}/checkout?seats=${selected.join(',')}`)}
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-110"
               >
                 Total: {formatPrice(totalPrice(), 'USD')} · Continue
               </button>
@@ -327,7 +324,7 @@ export default function SeatSelectionPage() {
       )}
 
       {user && selected.length === 0 && (
-        <p className="pointer-events-none fixed right-6 bottom-4 z-40 flex items-center gap-1.5 text-xs text-zinc-600">
+        <p className="pointer-events-none fixed right-6 bottom-4 z-40 flex items-center gap-1.5 text-xs text-muted-foreground">
           <CheckCircle2 className="size-3.5 text-emerald-500/60" /> Live availability
         </p>
       )}

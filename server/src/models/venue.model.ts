@@ -1,6 +1,6 @@
 import { Schema, model, type Document, type Types } from 'mongoose';
 
-export type VenueType = 'concert' | 'theater' | 'stadium' | 'conference' | 'club';
+export type VenueType = 'hall' | 'stadium' | 'conference' | 'outdoor' | 'classroom';
 
 export interface VenueSectionConfig {
   id: string;
@@ -37,7 +37,7 @@ const sectionSchema = new Schema<VenueSectionConfig>(
 const venueSchema = new Schema<IVenue>(
   {
     name: { type: String, required: true, trim: true, minlength: 2, maxlength: 120 },
-    type: { type: String, enum: ['concert', 'theater', 'stadium', 'conference', 'club'], required: true, index: true },
+    type: { type: String, enum: ['hall', 'stadium', 'conference', 'outdoor', 'classroom'], required: true, index: true },
     address: { type: String, required: true, trim: true, maxlength: 200 },
     city: { type: String, required: true, trim: true, maxlength: 80, index: true },
     coordinates: { type: [Number], required: true, index: '2dsphere', default: [0, 0] },

@@ -13,12 +13,12 @@ export const createEvent = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const updateEvent = asyncHandler(async (req: Request, res: Response) => {
-  const event = await eventService.update(req.params.id, req.body, req.user!.id);
+  const event = await eventService.update(req.params.id, req.body, req.user!.id, req.user!.role);
   res.json({ success: true, message: 'Event updated', data: { event } });
 });
 
 export const deleteEvent = asyncHandler(async (req: Request, res: Response) => {
-  await eventService.delete(req.params.id, req.user!.id);
+  await eventService.delete(req.params.id, req.user!.id, req.user!.role);
   res.json({ success: true, message: 'Event deleted' });
 });
 

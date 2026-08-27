@@ -12,7 +12,7 @@ export function EventCard({ event, index = 0 }: { event: PublicEventSummary; ind
   return (
     <Link
       to={`/events/${event.slug}`}
-      className="group flex flex-col gap-3 rounded-lg border border-border bg-card p-3 transition duration-200 hover:-translate-y-0.5 hover:border-signal/50"
+      className="group flex flex-col gap-3 rounded-lg border border-border bg-card p-3 transition duration-200 hover:-translate-y-0.5 hover:border-primary/50"
     >
       <div className="notch-tr relative h-36 overflow-hidden rounded-md bg-muted">
         <img

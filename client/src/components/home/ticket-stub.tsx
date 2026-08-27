@@ -37,10 +37,10 @@ export function TicketStub({ event, index = 0 }: { event: PublicEventSummary; in
   return (
     <Link
       to={`/events/${event.slug}`}
-      className="group block w-full max-w-sm rotate-[-1.2deg] rounded-lg border border-border bg-card shadow-2xl shadow-background/60 transition duration-300 hover:rotate-0 hover:border-signal/40 hover:shadow-signal/5"
+      className="group block w-full max-w-sm rotate-[-1.2deg] rounded-lg border border-border bg-card shadow-2xl shadow-background/60 transition duration-300 hover:rotate-0 hover:border-primary/40 hover:shadow-primary/5"
     >
       <div className="flex items-center justify-between px-4 pt-3 font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
-        <span>Admit one</span>
+        <span>Reserve one</span>
         <span className="text-gold-dim">{serialOf(event.slug)}</span>
       </div>
 

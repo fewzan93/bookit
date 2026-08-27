@@ -15,8 +15,8 @@ import {
 } from '../api';
 
 const fieldClass =
-  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-fuchsia-400/60 focus:ring-2 focus:ring-fuchsia-400/20';
-const labelClass = 'mb-1.5 block text-xs font-semibold tracking-wider text-zinc-400 uppercase';
+  'w-full rounded-xl border border-border bg-card px-4 py-2.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary/60 focus:ring-2 focus:ring-primary/20';
+const labelClass = 'mb-1.5 block text-xs font-semibold tracking-wider text-muted-foreground uppercase';
 
 interface TierRow extends TierInput {
   key: string;
@@ -50,7 +50,7 @@ export default function EventForm() {
   const [createVenue, { isLoading: creatingVenue }] = useCreateVenueMutation();
 
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('music');
+  const [category, setCategory] = useState('education');
   const [description, setDescription] = useState('');
   const [startAt, setStartAt] = useState('');
   const [endAt, setEndAt] = useState('');
@@ -61,11 +61,11 @@ export default function EventForm() {
   const [venueId, setVenueId] = useState('');
   const [createNewVenue, setCreateNewVenue] = useState(false);
   const [venueName, setVenueName] = useState('');
-  const [venueType, setVenueType] = useState('concert');
+  const [venueType, setVenueType] = useState('hall');
   const [venueAddress, setVenueAddress] = useState('');
   const [venueCity, setVenueCity] = useState('');
-  const [venueLat, setVenueLat] = useState('9.01');
-  const [venueLng, setVenueLng] = useState('38.75');
+  const [venueLat, setVenueLat] = useState('9.0197');
+  const [venueLng, setVenueLng] = useState('38.7635');
   const [sections, setSections] = useState<SectionRow[]>([]);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -232,11 +232,11 @@ export default function EventForm() {
         <ArrowLeft className="size-4" /> Back to events
       </Link>
 
-      <h1 className="mt-3 text-2xl font-bold text-white">{editing ? 'Edit event' : 'Create event'}</h1>
-      <p className="text-sm text-zinc-500">Fill in the details, add ticket tiers and publish when ready.</p>
+      <h1 className="mt-3 text-2xl font-bold text-foreground">{editing ? 'Edit event' : 'Create event'}</h1>
+      <p className="text-sm text-muted-foreground">Fill in the details, add ticket tiers and publish when ready.</p>
 
       {submitError && (
-        <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-red-400/30 bg-red-500/10 px-3.5 py-3 text-sm text-red-300">
+        <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-destructive/30 bg-destructive/10 px-3.5 py-3 text-sm text-destructive">
           <AlertCircle className="mt-0.5 size-4 shrink-0" />
           <span>{submitError}</span>
         </div>
@@ -246,12 +246,11 @@ export default function EventForm() {
         <Section title="Basics">
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Event title *" className="sm:col-span-2">
-              <input value={title} onChange={(e) => setTitle(e.target.value)} className={fieldClass} placeholder="e.g. Ethio Jazz Grand Night" required />
+              <input value={title} onChange={(e) => setTitle(e.target.value)} className={fieldClass}          placeholder="e.g. Community Football Tournament" required />
             </Field>
             <Field label="Category *">
               <select value={category} onChange={(e) => setCategory(e.target.value)} className={fieldClass}>
-                {EVENT_CATEGORIES.map((c) => (
-                  <option key={c.value} value={c.value} className="bg-zinc-900">
+                {EVENT_CATEGORIES.map((c) => (                    <option key={c.value} value={c.value} className="bg-card">
                     {c.label}
                   </option>
                 ))}
@@ -272,11 +271,11 @@ export default function EventForm() {
                 >
                   <option value="">Select venue…</option>
                   {venueOptions.map((v) => (
-                    <option key={v._id} value={v._id} className="bg-zinc-900">
+                    <option key={v._id} value={v._id} className="bg-card">
                       {v.name}
                     </option>
                   ))}
-                  <option value="__new__" className="bg-zinc-900">
+                  <option value="__new__" className="bg-card">
                     + Create new venue
                   </option>
                 </select>
@@ -289,11 +288,11 @@ export default function EventForm() {
                 </Field>
                 <Field label="Venue type *">
                   <select value={venueType} onChange={(e) => setVenueType(e.target.value)} className={fieldClass}>
-                    <option value="concert" className="bg-zinc-900">Concert hall</option>
-                    <option value="theater" className="bg-zinc-900">Theater</option>
-                    <option value="stadium" className="bg-zinc-900">Stadium</option>
-                    <option value="conference" className="bg-zinc-900">Conference</option>
-                    <option value="club" className="bg-zinc-900">Club</option>
+                    <option value="hall" className="bg-card">Event Hall</option>
+                    <option value="stadium" className="bg-card">Stadium</option>
+                    <option value="conference" className="bg-card">Conference Center</option>
+                    <option value="outdoor" className="bg-card">Outdoor Ground</option>
+                    <option value="classroom" className="bg-card">Classroom / Workshop</option>
                   </select>
                 </Field>
                 <Field label="Venue address *">
@@ -312,8 +311,8 @@ export default function EventForm() {
             )}
           </div>
           {createNewVenue && (
-            <div className="mt-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4">
-              <p className="mb-3 text-xs font-semibold tracking-widest text-zinc-400 uppercase">
+            <div className="mt-4 rounded-2xl border border-border bg-muted/50 p-4">
+              <p className="mb-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
                 Seat sections <span className="normal-case text-zinc-600">(defines the interactive seat map)</span>
               </p>
               <div className="space-y-2">
@@ -332,7 +331,7 @@ export default function EventForm() {
                     >
                       <option value="">Tier…</option>
                       {tiers.map((t, idx) => (
-                        <option key={`tier-${idx + 1}`} value={`tier-${idx + 1}`} className="bg-zinc-900">
+                        <option key={`tier-${idx + 1}`} value={`tier-${idx + 1}`} className="bg-card">
                           {t.name || `Tier ${idx + 1}`}
                         </option>
                       ))}
@@ -364,10 +363,10 @@ export default function EventForm() {
                       placeholder="Start #"
                       title="Starting seat number"
                     />
-                    <button
-                      type="button"
-                      onClick={() => setSections((prev) => prev.filter((s) => s.key !== sec.key))}
-                      className="flex size-9 items-center justify-center self-center rounded-xl border border-white/10 text-zinc-500 transition hover:border-red-400/50 hover:text-red-300"
+            <button
+              type="button"
+              onClick={() => setSections((prev) => prev.filter((s) => s.key !== sec.key))}
+              className="flex size-9 items-center justify-center self-center rounded-xl border border-border text-muted-foreground transition hover:border-destructive/50 hover:text-destructive"
                       aria-label={`Remove section ${i + 1}`}
                     >
                       <Trash2 className="size-4" />
@@ -382,7 +381,7 @@ export default function EventForm() {
               >
                 <Plus className="size-4" /> Add section
               </button>
-              <p className="mt-2 text-xs text-zinc-600">
+              <p className="mt-2 text-xs text-muted-foreground">
                 Each section becomes a block on the seat map (rows A–Z from top, seats numbered from Start #).
               </p>
             </div>
@@ -418,7 +417,7 @@ export default function EventForm() {
 
         <Section title="Banner image">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <div className="relative flex h-32 w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] sm:w-56">
+            <div className="relative flex h-32 w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-muted sm:w-56">
               {bannerUrl ? (
                 <img src={bannerUrl} alt="Banner preview" className="size-full object-cover" />
               ) : (
@@ -442,7 +441,7 @@ export default function EventForm() {
                 )}
               </label>
               {uploadError && <p className="mt-2 text-xs text-red-300">{uploadError}</p>}
-              {bannerUrl && <p className="mt-2 truncate text-xs text-zinc-500">{bannerUrl}</p>}
+              {bannerUrl && <p className="mt-2 truncate text-xs text-muted-foreground">{bannerUrl}</p>}
             </div>
           </div>
         </Section>
@@ -450,7 +449,7 @@ export default function EventForm() {
         <Section title="Ticket tiers">
           <div className="space-y-3">
             {tiers.map((tier, index) => (
-              <div key={tier.key} className="grid gap-3 rounded-2xl border border-white/5 bg-white/[0.02] p-4 sm:grid-cols-[1fr_100px_90px_90px_150px_40px]">
+              <div key={tier.key} className="grid gap-3 rounded-2xl border border-border bg-muted/50 p-4 sm:grid-cols-[1fr_100px_90px_90px_150px_40px]">
                 <Field label={index === 0 ? 'Name *' : undefined}>
                   <input
                     value={tier.name}
@@ -502,7 +501,7 @@ export default function EventForm() {
                   type="button"
                   onClick={() => setTiers((prev) => (prev.length > 1 ? prev.filter((t) => t.key !== tier.key) : prev))}
                   disabled={tiers.length <= 1}
-                  className="mt-0.5 flex size-9 items-center justify-center self-end rounded-xl border border-white/10 text-zinc-500 transition hover:border-red-400/50 hover:text-red-300 disabled:opacity-30 sm:mb-0.5"
+                  className="mt-0.5 flex size-9 items-center justify-center self-end rounded-xl border border-border text-muted-foreground transition hover:border-destructive/50 hover:text-destructive disabled:opacity-30 sm:mb-0.5"
                   aria-label="Remove tier"
                 >
                   <Trash2 className="size-4" />
@@ -517,7 +516,7 @@ export default function EventForm() {
           >
             <Plus className="size-4" /> Add tier
           </button>
-          <p className="mt-2 text-xs text-zinc-600">
+          <p className="mt-2 text-xs text-muted-foreground">
             Leave &quot;Offer until&quot; empty for an unlimited tier. Set an &quot;After&quot; price to switch automatically once the offer ends or the tier sells out.
           </p>
         </Section>
@@ -526,7 +525,7 @@ export default function EventForm() {
           <button
             onClick={() => handleSubmit('published')}
             disabled={busy}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-fuchsia-500 to-violet-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110 disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-5 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-110 disabled:opacity-60"
           >
             {busy ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
             {editing ? 'Save & publish' : 'Create & publish'}
@@ -534,7 +533,7 @@ export default function EventForm() {
           <button
             onClick={() => handleSubmit('draft')}
             disabled={busy}
-            className="rounded-xl border border-white/10 px-5 py-3 text-sm font-semibold text-zinc-300 transition hover:border-white/30 hover:text-white disabled:opacity-60"
+            className="rounded-xl border border-border px-5 py-3 text-sm font-semibold text-muted-foreground transition hover:border-foreground/30 hover:text-foreground disabled:opacity-60"
           >
             {editing ? 'Save as draft' : 'Save draft'}
           </button>
@@ -546,8 +545,8 @@ export default function EventForm() {
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="rounded-3xl border border-white/5 bg-white/[0.02] p-6">
-      <h2 className="mb-4 text-sm font-bold tracking-widest text-zinc-300 uppercase">{title}</h2>
+    <section className="rounded-3xl border border-border bg-card p-6">
+      <h2 className="mb-4 text-sm font-bold tracking-widest text-foreground uppercase">{title}</h2>
       {children}
     </section>
   );

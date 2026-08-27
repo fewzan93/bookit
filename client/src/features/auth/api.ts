@@ -14,7 +14,7 @@ export interface RegisterInput {
   name: string;
   email: string;
   password: string;
-  role?: 'user' | 'organizer';
+  role?: 'user';
   phone?: string;
 }
 

@@ -89,13 +89,12 @@ export default function HomePage() {
                 {"//"} Live seat maps on every event
               </p>
               <h1 className="mt-4 font-heading text-5xl leading-[1.02] font-extrabold tracking-tight text-balance sm:text-6xl">
-                One night.
+                One event.
                 <br />
                 One seat. <span className="text-signal">Yours.</span>
               </h1>
               <p className="mt-5 max-w-lg text-pretty text-muted-foreground">
-                Find the night, hold your seat on the live map, and show your ticket at the door. Seats lock for 8
-                minutes, then they go back on the board.
+                Discover amazing events — from sports tournaments to tech workshops and community gatherings. Hold your seat on the live map, and show your QR ticket at the door. Seats lock for 8 minutes, then they go back on the board.
               </p>
 
               <form onSubmit={handleSearch} className="mt-8 flex max-w-lg gap-2">
@@ -103,7 +102,7 @@ export default function HomePage() {
                   type="search"
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
-                  placeholder="Search events, artists, tags…"
+                  placeholder="Search events, workshops, tournaments…"
                   aria-label="Search events"
                   className="h-9 bg-card"
                 />
@@ -232,7 +231,7 @@ export default function HomePage() {
           <p className="font-mono text-[11px] tracking-[0.22em] text-gold-dim uppercase">{"//"} How it works</p>
           <div className="mt-8 grid gap-10 sm:grid-cols-3 sm:gap-8">
             {[
-              ["Pick", "Choose a night, then tap seats on the live map. Every block is color-coded by tier."],
+              ["Pick", "Choose an event, then tap seats on the live map. Every block is color-coded by tier."],
               ["Lock", "Your seats hold for 8 minutes. Everyone else sees them marked — no double booking."],
               ["Enter", "Show your QR ticket at the door. Organizers scan, you walk in."],
             ].map(([tag, copy]) => (
@@ -247,8 +246,8 @@ export default function HomePage() {
 
         <footer className="border-t">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-8 font-mono text-[10px] tracking-[0.16em] text-muted-foreground uppercase sm:px-6">
-            <span>© 2026 Bookit — Addis Ababa</span>
-            <span>Live seat maps · Checkout next</span>
+            <span>© 2026 Bookit</span>
+            <span>Live seat maps · Seamless checkout</span>
           </div>
         </footer>
       </div>

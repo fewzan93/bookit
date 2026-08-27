@@ -27,7 +27,7 @@ export const tierSchema = z.object({
 export const eventCreateSchema = z.object({
   title: z.string().trim().min(3).max(140),
   description: z.string().trim().min(10).max(5000),
-  category: z.enum(['music', 'theater', 'sports', 'conference', 'festival', 'comedy', 'other']),
+  category: z.enum(['education', 'sports', 'gaming', 'tech', 'community', 'other']),
   bannerUrl: z.string().min(1),
   bannerPublicId: z.string().optional(),
   venueId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid venue id'),
@@ -46,7 +46,7 @@ export const eventUpdateSchema = eventCreateSchema.partial();
 
 export const listQuerySchema = z.object({
   query: z.string().trim().max(120).optional(),
-  category: z.enum(['music', 'theater', 'sports', 'conference', 'festival', 'comedy', 'other']).optional(),
+  category: z.enum(['education', 'sports', 'gaming', 'tech', 'community', 'other']).optional(),
   city: z.string().trim().max(80).optional(),
   startFrom: z.coerce.date().optional(),
   startTo: z.coerce.date().optional(),

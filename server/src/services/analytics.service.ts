@@ -11,9 +11,10 @@ interface DayBucket {
 }
 
 export class AnalyticsService {
-  private async assertOwnerEvent(eventId: string, organizerId: string): Promise<void> {
+  private async assertOwnerEvent(eventId: string, organizerId: string, role?: string): Promise<void> {
     const event = await Event.findById(eventId).select('organizerId').exec();
     if (!event) throw new ApiError(404, 'Event not found');
+    if (role === 'admin') return;
     if (event.organizerId.toString() !== organizerId) throw new ApiError(403, 'Not your event');
   }
 
@@ -77,14 +78,14 @@ export class AnalyticsService {
     };
   }
 
-  async eventAnalytics(eventId: string, organizerId: string): Promise<{
+  async eventAnalytics(eventId: string, organizerId: string, role?: string): Promise<{
     overview: { sold: number; capacity: number; revenue: number; bookings: number; attendance: number; attendanceRate: number };
     daily: DayBucket[];
     peakHours: { hour: number; count: number }[];
     tiers: { tierId: string; name: string; sold: number; capacity: number; revenue: number }[];
     recentBookings: { bookingRef: string; total: number; status: string; paidAt?: Date }[];
   }> {
-    await this.assertOwnerEvent(eventId, organizerId);
+    await this.assertOwnerEvent(eventId, organizerId, role);
 
     const event = await Event.findById(eventId).exec();
     if (!event) throw new ApiError(404, 'Event not found');
@@ -138,8 +139,8 @@ export class AnalyticsService {
     };
   }
 
-  async ordersCsv(eventId: string, organizerId: string): Promise<string> {
-    await this.assertOwnerEvent(eventId, organizerId);
+  async ordersCsv(eventId: string, organizerId: string, role?: string): Promise<string> {
+    await this.assertOwnerEvent(eventId, organizerId, role);
     const bookings = await Booking.find({ eventId }).populate('userId', 'email name').exec();
 
     const rows = [['bookingRef', 'userEmail', 'holderName', 'seats', 'total', 'currency', 'status', 'paidAt']];
@@ -159,8 +160,8 @@ export class AnalyticsService {
     return toCsv(rows);
   }
 
-  async attendeesCsv(eventId: string, organizerId: string): Promise<string> {
-    await this.assertOwnerEvent(eventId, organizerId);
+  async attendeesCsv(eventId: string, organizerId: string, role?: string): Promise<string> {
+    await this.assertOwnerEvent(eventId, organizerId, role);
     const tickets = await Ticket.find({ eventId }).populate('userId', 'email name').exec();
 
     const rows = [['ticketRef', 'userEmail', 'holderName', 'seat', 'tier', 'status', 'checkedInAt']];

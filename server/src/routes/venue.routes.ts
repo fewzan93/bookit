@@ -15,7 +15,7 @@ export const venueSectionSchema = z.object({
 
 export const venueSchema = z.object({
   name: z.string().trim().min(2).max(120),
-  type: z.enum(['concert', 'theater', 'stadium', 'conference', 'club']).default('concert'),
+  type: z.enum(['hall', 'stadium', 'conference', 'outdoor', 'classroom']).default('hall'),
   address: z.string().trim().min(2).max(200),
   city: z.string().trim().min(2).max(80),
   latitude: z.number().min(-90).max(90).default(0),

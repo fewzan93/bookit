@@ -17,7 +17,7 @@ export const listVenues = asyncHandler(async (req: Request, res: Response) => {
 
 export const getVenue = asyncHandler(async (req: Request, res: Response) => {
   const venue = await venueService.getById(req.params.id);
-  if (venue.ownerId.toString() !== req.user!.id && req.user!.role !== 'admin') {
+  if (req.user!.role !== 'admin' && venue.ownerId.toString() !== req.user!.id) {
     throw new ApiError(403, 'You can only view your own venues');
   }
   res.json({ success: true, data: { venue } });

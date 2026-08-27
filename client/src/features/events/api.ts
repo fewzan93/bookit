@@ -242,10 +242,9 @@ export const {
 } = eventsApi;
 
 export const EVENT_CATEGORIES: { value: string; label: string }[] = [
-  { value: 'music', label: 'Music' },
-  { value: 'theater', label: 'Theater' },
+  { value: 'education', label: 'Education' },
   { value: 'sports', label: 'Sports' },
-  { value: 'conference', label: 'Conference' },
-  { value: 'festival', label: 'Festival' },
-  { value: 'comedy', label: 'Comedy' },
+  { value: 'gaming', label: 'Gaming' },
+  { value: 'tech', label: 'Tech' },
+  { value: 'community', label: 'Community' },
 ];

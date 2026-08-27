@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export function AuthShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-zinc-950 px-4 py-12">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 -left-32 size-96 rounded-full bg-fuchsia-500/20 blur-3xl" />
         <div className="absolute -bottom-32 -right-32 size-96 rounded-full bg-violet-500/20 blur-3xl" />
